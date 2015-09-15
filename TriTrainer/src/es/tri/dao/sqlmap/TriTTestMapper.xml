@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="es.tri.dao.TriTTestMapper" >
+  <resultMap id="BaseResultMap" type="es.tri.dao.model.TriTTest" >
+    <id column="idTest" property="idTest" jdbcType="INTEGER" />
+    <result column="idEntreno" property="idEntreno" jdbcType="INTEGER" />
+    <result column="tiempo" property="tiempo" jdbcType="INTEGER" />
+    <result column="FCinicial" property="FCinicial" jdbcType="INTEGER" />
+    <result column="FCMax" property="FCMax" jdbcType="INTEGER" />
+    <result column="FCMedia" property="FCMedia" jdbcType="INTEGER" />
+    <result column="Fecha_baja" property="fecha_baja" jdbcType="DATE" />
+    <result column="id_tipo_test" property="id_tipo_test" jdbcType="INTEGER" />
+    <result column="id_entreno_ejercicio" property="id_entreno_ejercicio" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    idTest, idEntreno, tiempo, FCinicial, FCMax, FCMedia, Fecha_baja, id_tipo_test, id_entreno_ejercicio
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="es.tri.dao.model.TriTTestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tri_t_test
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tri_t_test
+    where idTest = #{idTest,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tri_t_test
+    where idTest = #{idTest,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="es.tri.dao.model.TriTTest" >
+    insert into tri_t_test (idTest, idEntreno, tiempo, 
+      FCinicial, FCMax, FCMedia, 
+      Fecha_baja, id_tipo_test, id_entreno_ejercicio
+      )
+    values (#{idTest,jdbcType=INTEGER}, #{idEntreno,jdbcType=INTEGER}, #{tiempo,jdbcType=INTEGER}, 
+      #{FCinicial,jdbcType=INTEGER}, #{FCMax,jdbcType=INTEGER}, #{FCMedia,jdbcType=INTEGER}, 
+      #{fecha_baja,jdbcType=DATE}, #{id_tipo_test,jdbcType=INTEGER}, #{id_entreno_ejercicio,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="es.tri.dao.model.TriTTest" >
+    insert into tri_t_test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idTest != null" >
+        idTest,
+      </if>
+      <if test="idEntreno != null" >
+        idEntreno,
+      </if>
+      <if test="tiempo != null" >
+        tiempo,
+      </if>
+      <if test="FCinicial != null" >
+        FCinicial,
+      </if>
+      <if test="FCMax != null" >
+        FCMax,
+      </if>
+      <if test="FCMedia != null" >
+        FCMedia,
+      </if>
+      <if test="fecha_baja != null" >
+        Fecha_baja,
+      </if>
+      <if test="id_tipo_test != null" >
+        id_tipo_test,
+      </if>
+      <if test="id_entreno_ejercicio != null" >
+        id_entreno_ejercicio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idTest != null" >
+        #{idTest,jdbcType=INTEGER},
+      </if>
+      <if test="idEntreno != null" >
+        #{idEntreno,jdbcType=INTEGER},
+      </if>
+      <if test="tiempo != null" >
+        #{tiempo,jdbcType=INTEGER},
+      </if>
+      <if test="FCinicial != null" >
+        #{FCinicial,jdbcType=INTEGER},
+      </if>
+      <if test="FCMax != null" >
+        #{FCMax,jdbcType=INTEGER},
+      </if>
+      <if test="FCMedia != null" >
+        #{FCMedia,jdbcType=INTEGER},
+      </if>
+      <if test="fecha_baja != null" >
+        #{fecha_baja,jdbcType=DATE},
+      </if>
+      <if test="id_tipo_test != null" >
+        #{id_tipo_test,jdbcType=INTEGER},
+      </if>
+      <if test="id_entreno_ejercicio != null" >
+        #{id_entreno_ejercicio,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tri_t_test
+    <set >
+      <if test="record.idTest != null" >
+        idTest = #{record.idTest,jdbcType=INTEGER},
+      </if>
+      <if test="record.idEntreno != null" >
+        idEntreno = #{record.idEntreno,jdbcType=INTEGER},
+      </if>
+      <if test="record.tiempo != null" >
+        tiempo = #{record.tiempo,jdbcType=INTEGER},
+      </if>
+      <if test="record.FCinicial != null" >
+        FCinicial = #{record.FCinicial,jdbcType=INTEGER},
+      </if>
+      <if test="record.FCMax != null" >
+        FCMax = #{record.FCMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.FCMedia != null" >
+        FCMedia = #{record.FCMedia,jdbcType=INTEGER},
+      </if>
+      <if test="record.fecha_baja != null" >
+        Fecha_baja = #{record.fecha_baja,jdbcType=DATE},
+      </if>
+      <if test="record.id_tipo_test != null" >
+        id_tipo_test = #{record.id_tipo_test,jdbcType=INTEGER},
+      </if>
+      <if test="record.id_entreno_ejercicio != null" >
+        id_entreno_ejercicio = #{record.id_entreno_ejercicio,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tri_t_test
+    set idTest = #{record.idTest,jdbcType=INTEGER},
+      idEntreno = #{record.idEntreno,jdbcType=INTEGER},
+      tiempo = #{record.tiempo,jdbcType=INTEGER},
+      FCinicial = #{record.FCinicial,jdbcType=INTEGER},
+      FCMax = #{record.FCMax,jdbcType=INTEGER},
+      FCMedia = #{record.FCMedia,jdbcType=INTEGER},
+      Fecha_baja = #{record.fecha_baja,jdbcType=DATE},
+      id_tipo_test = #{record.id_tipo_test,jdbcType=INTEGER},
+      id_entreno_ejercicio = #{record.id_entreno_ejercicio,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="es.tri.dao.model.TriTTest" >
+    update tri_t_test
+    <set >
+      <if test="idEntreno != null" >
+        idEntreno = #{idEntreno,jdbcType=INTEGER},
+      </if>
+      <if test="tiempo != null" >
+        tiempo = #{tiempo,jdbcType=INTEGER},
+      </if>
+      <if test="FCinicial != null" >
+        FCinicial = #{FCinicial,jdbcType=INTEGER},
+      </if>
+      <if test="FCMax != null" >
+        FCMax = #{FCMax,jdbcType=INTEGER},
+      </if>
+      <if test="FCMedia != null" >
+        FCMedia = #{FCMedia,jdbcType=INTEGER},
+      </if>
+      <if test="fecha_baja != null" >
+        Fecha_baja = #{fecha_baja,jdbcType=DATE},
+      </if>
+      <if test="id_tipo_test != null" >
+        id_tipo_test = #{id_tipo_test,jdbcType=INTEGER},
+      </if>
+      <if test="id_entreno_ejercicio != null" >
+        id_entreno_ejercicio = #{id_entreno_ejercicio,jdbcType=INTEGER},
+      </if>
+    </set>
+    where idTest = #{idTest,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="es.tri.dao.model.TriTTest" >
+    update tri_t_test
+    set idEntreno = #{idEntreno,jdbcType=INTEGER},
+      tiempo = #{tiempo,jdbcType=INTEGER},
+      FCinicial = #{FCinicial,jdbcType=INTEGER},
+      FCMax = #{FCMax,jdbcType=INTEGER},
+      FCMedia = #{FCMedia,jdbcType=INTEGER},
+      Fecha_baja = #{fecha_baja,jdbcType=DATE},
+      id_tipo_test = #{id_tipo_test,jdbcType=INTEGER},
+      id_entreno_ejercicio = #{id_entreno_ejercicio,jdbcType=INTEGER}
+    where idTest = #{idTest,jdbcType=INTEGER}
+  </update>
+</mapper>

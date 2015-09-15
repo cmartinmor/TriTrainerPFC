@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation"
+        value="false" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.custom.i18n.resources"
+        value="ApplicationResources" />
+ 
+    <package name="default" extends="struts-default" namespace="/">
+    
+    
+    	<action name="emailerAction"
+            class="es.tri.action.EmailerAction">
+            <result name="success">/jsp/Login.jsp</result>
+            <result name="error">/jsp/Login.jsp</result>
+        </action>
+        <action name="contactoAction"
+            class="es.tri.action.ContactoAction">
+            <result name="success">/jsp/Welcome.jsp</result>
+            <result name="error">/jsp/Welcome.jsp</result>
+        </action>
+        <action name="login"
+            class="es.tri.action.LoginAction">
+            <result name="success">/jsp/SuccessCustomer.jsp</result>
+            <result name="admin">/jsp/admin.jsp</result>
+            <result name="error">/jsp/Login.jsp</result>
+        </action>
+        <action name="profile"
+            class="es.tri.action.ProfileAction">
+            <result name="success">/jsp/SuccessCustomer.jsp</result>
+            <result name="error">/jsp/Login.jsp</result>
+        </action>
+        
+        <action name="registro"
+            class="es.tri.action.RegistroAction">
+            <result name="success">/jsp/SuccessCustomer.jsp</result> 
+                      
+            <result name="input">/jsp/Registro.jsp</result>
+            <result name="error">/jsp/Registro.jsp</result>
+        </action>
+
+        <action name="guardar"
+            class="es.tri.action.GuardarAction">
+           
+          <result type="redirectAction">
+            	<param name="actionName">jsp/login</param>
+        		
+    		</result>
+        </action>
+
+		 <action name="nuevo" class="es.tri.action.NuevoAction">
+            <result type="redirectAction">
+            	<param name="actionName">jsp/login</param>
+            	 
+    		</result>
+        </action>
+        
+        <action name="urlTagAction" 
+		class="es.tri.action.URLTagAction" >
+		<result name="success">jsp/SuccessCustomer.jsp</result>
+		 </action>
+		
+		 
+	
+    </package>
+</struts>

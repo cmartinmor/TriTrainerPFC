@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="es.tri.dao.TriTModeloconocimientoMapper" >
+  <resultMap id="BaseResultMap" type="es.tri.dao.model.TriTModeloconocimiento" >
+    <id column="idInferencia" property="idInferencia" jdbcType="INTEGER" />
+    <result column="boolTiempo" property="boolTiempo" jdbcType="INTEGER" />
+    <result column="boolUmbralAerobio" property="boolUmbralAerobio" jdbcType="INTEGER" />
+    <result column="boolFuerza" property="boolFuerza" jdbcType="INTEGER" />
+    <result column="boolTecnica" property="boolTecnica" jdbcType="INTEGER" />
+    <result column="boolVelocidad" property="boolVelocidad" jdbcType="INTEGER" />
+    <result column="boolRitmo" property="boolRitmo" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    idInferencia, boolTiempo, boolUmbralAerobio, boolFuerza, boolTecnica, boolVelocidad, 
+    boolRitmo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="es.tri.dao.model.TriTModeloconocimientoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tri_t_modeloconocimiento
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tri_t_modeloconocimiento
+    where idInferencia = #{idInferencia,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tri_t_modeloconocimiento
+    where idInferencia = #{idInferencia,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="es.tri.dao.model.TriTModeloconocimiento" >
+    insert into tri_t_modeloconocimiento (idInferencia, boolTiempo, boolUmbralAerobio, 
+      boolFuerza, boolTecnica, boolVelocidad, 
+      boolRitmo)
+    values (#{idInferencia,jdbcType=INTEGER}, #{boolTiempo,jdbcType=INTEGER}, #{boolUmbralAerobio,jdbcType=INTEGER}, 
+      #{boolFuerza,jdbcType=INTEGER}, #{boolTecnica,jdbcType=INTEGER}, #{boolVelocidad,jdbcType=INTEGER}, 
+      #{boolRitmo,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="es.tri.dao.model.TriTModeloconocimiento" >
+    insert into tri_t_modeloconocimiento
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idInferencia != null" >
+        idInferencia,
+      </if>
+      <if test="boolTiempo != null" >
+        boolTiempo,
+      </if>
+      <if test="boolUmbralAerobio != null" >
+        boolUmbralAerobio,
+      </if>
+      <if test="boolFuerza != null" >
+        boolFuerza,
+      </if>
+      <if test="boolTecnica != null" >
+        boolTecnica,
+      </if>
+      <if test="boolVelocidad != null" >
+        boolVelocidad,
+      </if>
+      <if test="boolRitmo != null" >
+        boolRitmo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idInferencia != null" >
+        #{idInferencia,jdbcType=INTEGER},
+      </if>
+      <if test="boolTiempo != null" >
+        #{boolTiempo,jdbcType=INTEGER},
+      </if>
+      <if test="boolUmbralAerobio != null" >
+        #{boolUmbralAerobio,jdbcType=INTEGER},
+      </if>
+      <if test="boolFuerza != null" >
+        #{boolFuerza,jdbcType=INTEGER},
+      </if>
+      <if test="boolTecnica != null" >
+        #{boolTecnica,jdbcType=INTEGER},
+      </if>
+      <if test="boolVelocidad != null" >
+        #{boolVelocidad,jdbcType=INTEGER},
+      </if>
+      <if test="boolRitmo != null" >
+        #{boolRitmo,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tri_t_modeloconocimiento
+    <set >
+      <if test="record.idInferencia != null" >
+        idInferencia = #{record.idInferencia,jdbcType=INTEGER},
+      </if>
+      <if test="record.boolTiempo != null" >
+        boolTiempo = #{record.boolTiempo,jdbcType=INTEGER},
+      </if>
+      <if test="record.boolUmbralAerobio != null" >
+        boolUmbralAerobio = #{record.boolUmbralAerobio,jdbcType=INTEGER},
+      </if>
+      <if test="record.boolFuerza != null" >
+        boolFuerza = #{record.boolFuerza,jdbcType=INTEGER},
+      </if>
+      <if test="record.boolTecnica != null" >
+        boolTecnica = #{record.boolTecnica,jdbcType=INTEGER},
+      </if>
+      <if test="record.boolVelocidad != null" >
+        boolVelocidad = #{record.boolVelocidad,jdbcType=INTEGER},
+      </if>
+      <if test="record.boolRitmo != null" >
+        boolRitmo = #{record.boolRitmo,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tri_t_modeloconocimiento
+    set idInferencia = #{record.idInferencia,jdbcType=INTEGER},
+      boolTiempo = #{record.boolTiempo,jdbcType=INTEGER},
+      boolUmbralAerobio = #{record.boolUmbralAerobio,jdbcType=INTEGER},
+      boolFuerza = #{record.boolFuerza,jdbcType=INTEGER},
+      boolTecnica = #{record.boolTecnica,jdbcType=INTEGER},
+      boolVelocidad = #{record.boolVelocidad,jdbcType=INTEGER},
+      boolRitmo = #{record.boolRitmo,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="es.tri.dao.model.TriTModeloconocimiento" >
+    update tri_t_modeloconocimiento
+    <set >
+      <if test="boolTiempo != null" >
+        boolTiempo = #{boolTiempo,jdbcType=INTEGER},
+      </if>
+      <if test="boolUmbralAerobio != null" >
+        boolUmbralAerobio = #{boolUmbralAerobio,jdbcType=INTEGER},
+      </if>
+      <if test="boolFuerza != null" >
+        boolFuerza = #{boolFuerza,jdbcType=INTEGER},
+      </if>
+      <if test="boolTecnica != null" >
+        boolTecnica = #{boolTecnica,jdbcType=INTEGER},
+      </if>
+      <if test="boolVelocidad != null" >
+        boolVelocidad = #{boolVelocidad,jdbcType=INTEGER},
+      </if>
+      <if test="boolRitmo != null" >
+        boolRitmo = #{boolRitmo,jdbcType=INTEGER},
+      </if>
+    </set>
+    where idInferencia = #{idInferencia,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="es.tri.dao.model.TriTModeloconocimiento" >
+    update tri_t_modeloconocimiento
+    set boolTiempo = #{boolTiempo,jdbcType=INTEGER},
+      boolUmbralAerobio = #{boolUmbralAerobio,jdbcType=INTEGER},
+      boolFuerza = #{boolFuerza,jdbcType=INTEGER},
+      boolTecnica = #{boolTecnica,jdbcType=INTEGER},
+      boolVelocidad = #{boolVelocidad,jdbcType=INTEGER},
+      boolRitmo = #{boolRitmo,jdbcType=INTEGER}
+    where idInferencia = #{idInferencia,jdbcType=INTEGER}
+  </update>
+</mapper>
